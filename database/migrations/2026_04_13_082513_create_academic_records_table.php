@@ -16,6 +16,8 @@ return new class extends Migration
             $table->foreignId('graduate_id')->constrained('graduates')->cascadeOnDelete();
             $table->string('degree_type')->nullable();
             $table->string('award_type')->nullable();
+            $table->date('start_date')->nullable();
+            $table->date('end_date')->nullable();
             $table->string('graduate_year')->nullable();
             $table->timestamps();
         });

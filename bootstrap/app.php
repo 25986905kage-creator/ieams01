@@ -9,9 +9,12 @@ return Application::configure(basePath: dirname(__DIR__))
         web: __DIR__.'/../routes/web.php',
         commands: __DIR__.'/../routes/console.php',
         health: '/up',
-        then: function () {
-            Route::middleware('web')->group(base_path('routes/graduate.php'));
-        }
+        // then: function () {
+            // Register custom routes here with 'web' middleware group.
+        //     Route::middleware('web')
+        //         ->prefix('graduates')
+        //         ->group(base_path('routes/graduates.php'));
+        // }
     )
     ->withMiddleware(function (Middleware $middleware): void {
         //

@@ -14,11 +14,13 @@ return new class extends Migration
         Schema::create('graduates', function (Blueprint $table) {
             $table->id();
             $table->string('student_number')->unique();
-            $table->string('sevispass_id')->unique();
+            $table->string('sevispass_id')->nullable()->unique();
             $table->string('first_name');
             $table->string('last_name');
             $table->string('university_name')->nullable();
+            $table->string('course')->nullable();
             $table->date('birth_date')->nullable();
+            $table->date('graduation_date')->nullable();
             $table->string('gender')->nullable();
             $table->string('nationality')->nullable();
             $table->string('pob_country')->nullable();

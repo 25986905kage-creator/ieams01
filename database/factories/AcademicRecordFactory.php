@@ -24,6 +24,8 @@ class AcademicRecordFactory extends Factory
             'graduate_id' => Graduate::factory(),
             'degree_type' => $this->faker->randomElement(['Diploma', 'Postgraduate Diploma', 'Bachelors', 'Masters', 'PhD']),
             'award_type' => $this->faker->randomElement(['Bachelor of Science', 'Bachelor of Arts', 'Master of Science']),
+            'start_date' => $this->faker->date(),
+            'end_date' => $this->faker->date(),
             'graduate_year' => $this->faker->year(),
         ];
     }

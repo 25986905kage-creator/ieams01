@@ -7,13 +7,19 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 
-#[Fillable([
+class Graduate extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+    'id',
     'student_number', 
-    'sevispass_id', 
     'first_name', 
     'last_name', 
-    'university_name', 
-    'birth_date', 
+    'university_name',
+    'course',
+    'birth_date',
+    'graduation_date',
     'gender', 
     'nationality', 
     'pob_country', 
@@ -24,15 +30,11 @@ use Illuminate\Database\Eloquent\Relations\HasOne;
     'is_first_gen_village', 
     'father_education_level', 
     'mother_education_level'
-    ])
-]
-
-class Graduate extends Model
-{
-    use HasFactory;
+];
 
     protected $casts = [
         'birth_date' => 'date',
+        'graduation_date' => 'date', 
         'is_first_gen_family' => 'boolean',
         'is_first_gen_village' => 'boolean',
     ];

@@ -12,17 +12,15 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('graduates', function (Blueprint $table) {
-            $table->id();
-            $table->string('student_number')->unique();
-            $table->string('sevispass_id')->nullable()->unique();
-            $table->string('first_name');
-            $table->string('last_name');
-            $table->string('university_name')->nullable();
-            $table->string('course')->nullable();
+            $table->id()->index()->index();
+            $table->string('student_number')->unique()->index();
+            $table->string('sevispass_id')->nullable()->unique()->index();
+            $table->string('first_name')->index();
+            $table->string('last_name')->index();
+            $table->string('name_used_at_uni')->nullable();
             $table->date('birth_date')->nullable();
-            $table->date('graduation_date')->nullable();
-            $table->string('gender')->nullable();
-            $table->string('nationality')->nullable();
+            $table->string('gender')->nullable()->index();
+            $table->string('nationality')->nullable()->index();
             $table->string('pob_country')->nullable();
             $table->string('home_province')->nullable();
             $table->string('pre_uni_city')->nullable();

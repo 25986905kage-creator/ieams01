@@ -61,3 +61,30 @@ textarea:focus[data-flux-control],
 select:focus[data-flux-control] {
     @apply outline-hidden ring-2 ring-accent ring-offset-2 ring-offset-accent-foreground;
 }
+
+@media print {
+    /* Hide the Flux Sidebar and top navigation during print */
+    flux\:sidebar, flux\:header {
+        display: none !important;
+    }
+    
+    /* Force background to white and text to black for better contrast */
+    body, html {
+        background-color: white !important;
+        color: black !important;
+    }
+
+    /* Prevent charts from breaking across pages */
+    flux\:card {
+        break-inside: avoid;
+        border: 1px solid #e5e7eb !important; /* light gray border */
+        box-shadow: none !important;
+    }
+
+    /* Ensure the main content takes up the full width of the PDF */
+    flux\:main {
+        width: 100% !important;
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+}

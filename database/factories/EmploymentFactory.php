@@ -27,7 +27,7 @@ class EmploymentFactory extends Factory
             'job_location_type' => $this->faker->randomElement(['Remote', 'On-site', 'Hybrid']),
             'industry_sector' => $this->faker->randomElement(['Technology', 'Finance', 'Healthcare', 'Education', 'Engineering']),
             'entrepreneurial_intent' => $this->faker->randomElement(['High', 'Medium', 'Low', 'None']),
-            'job_securing_date' => $this->faker->dateTimeBetween('-2 years', 'now')->format('Y-m-d'),
+            'job_securing_year' => $this->faker->date('-6 years', 'now')->format('Y-m-d'),
         ];
     }
 }

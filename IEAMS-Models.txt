@@ -1,0 +1,252 @@
+<?php
+
+namespace App\Models;
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+
+class AcademicRecord extends Model
+{
+
+    protected $fillable = [
+        'graduate_id',
+        'degree_type',
+        'award_type',
+        'uni_start_date',
+        'uni_end_date'
+    ];
+
+    protected $casts = [
+        'uni_start_date' => 'date',
+        'uni_end_date' => 'date'
+    ];
+
+    protected $model = AcademicRecord::class;
+
+    use HasFactory;
+
+    public function graduate(): BelongsTo
+    {
+        return $this->belongsTo(Graduate::class);
+    }
+}
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+#[Fillable([
+'graduate_id',
+        'aware_of_alumni_assoc',
+        'wants_to_join_alumni',
+        'personal_email',
+        'work_email',
+        'postal_address',
+        'primary_mobile_number',
+        'secondary_mobile_number',
+        'landline_number',
+        'primary_social_media',
+        'secondary_social_media',
+        'tertiary_social_media',
+    ])
+]
+
+class AlumniEngagement extends Model
+{
+    use HasFactory;
+
+    protected $casts = [
+        'aware_of_alumni_assoc' => 'boolean',
+        'wants_to_join_alumni' => 'boolean',
+    ];
+
+    public function graduate(): BelongsTo
+    {
+        return $this->belongsTo(Graduate::class);
+    }
+}
+
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+#[Fillable([
+        'graduate_id',
+        'employment_status',
+        'job_title',
+        'job_location_type',
+        'industry_sector',
+        'entrepreneurial_intent',
+        'job_securing_date',
+    ])
+]
+
+class Employment extends Model
+{
+    use HasFactory;
+    
+    protected $casts = [
+        'job_securing_date' => 'date',
+    ];
+
+    public function graduate(): BelongsTo
+    {
+        return $this->belongsTo(Graduate::class);
+    }
+}
+
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+#[Fillable([
+        'graduate_id',
+        'sat_teaching_quality',
+        'sat_faculty_interaction',
+        'sat_career_assistance',
+        'sat_employment_assistance',
+        'sat_faculty_mentorship',
+        'exp_oral_presentation',
+        'exp_problem_solving',
+        'exp_practical_learning',
+        'exp_innovation_modeling',
+        'impact_communication',
+        'impact_problem_solving',
+        'impact_teamwork',
+        'impact_tech_knowledge',
+        'exp_industry_networking',
+        'exp_alumni_networking',
+    ])
+]
+
+class FeedbackSkill extends Model
+{
+    use HasFactory;
+    
+    public function graduate(): BelongsTo
+    {
+        return $this->belongsTo(Graduate::class);
+    }
+}
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\Relations\HasOne;
+
+class Graduate extends Model
+{
+    use HasFactory;
+
+    protected $fillable = [
+    'id',
+    'student_number', 
+    'first_name', 
+    'last_name', 
+    'university_name',
+    'course',
+    'birth_date',
+    'graduation_date',
+    'gender', 
+    'nationality', 
+    'pob_country', 
+    'home_province', 
+    'pre_uni_city', 
+    'previous_school_name', 
+    'is_first_gen_family', 
+    'is_first_gen_village', 
+    'father_education_level', 
+    'mother_education_level'
+];
+
+    protected $casts = [
+        'birth_date' => 'date',
+        'graduation_date' => 'date', 
+        'is_first_gen_family' => 'boolean',
+        'is_first_gen_village' => 'boolean',
+    ];
+
+    // Assuming a graduate can have multiple academic records
+    public function academicRecords(): HasMany
+    {
+        return $this->hasMany(AcademicRecord::class);
+    }
+
+    // Assuming a graduate can have multiple employment history records
+    public function employments(): HasMany
+    {
+        return $this->hasMany(Employment::class);
+    }
+
+    public function universityExperience(): HasOne
+    {
+        return $this->hasOne(UniversityExperience::class);
+    }
+
+    public function feedbackSkills(): HasOne
+    {
+        return $this->hasOne(FeedbackSkill::class);
+    }
+
+    public function alumniEngagement(): HasOne
+    {
+        return $this->hasOne(AlumniEngagement::class);
+    }
+}
+
+
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+
+#[Fillable([
+        'graduate_id',
+        'has_leadership_experience',
+        'leadership_role_description',
+        'is_student_volunteer',
+        'is_education_adequate',
+        'rating_employment_potential',
+    ])
+]
+
+class UniversityExperience extends Model
+{
+   use HasFactory;
+
+   protected $casts = [
+        'has_leadership_experience' => 'boolean',
+        'is_student_volunteer' => 'boolean',
+        'is_education_adequate' => 'boolean',
+    ];
+
+    public function graduate(): BelongsTo
+    {
+        return $this->belongsTo(Graduate::class);
+    }
+}

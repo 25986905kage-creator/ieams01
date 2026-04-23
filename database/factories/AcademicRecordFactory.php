@@ -3,7 +3,6 @@
 namespace Database\Factories;
 
 use App\Models\AcademicRecord;
-use App\Models\Graduate;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -21,12 +20,9 @@ class AcademicRecordFactory extends Factory
     public function definition(): array
     {
         return [
-            'graduate_id' => Graduate::factory(),
-            'degree_type' => $this->faker->randomElement(['Diploma', 'Postgraduate Diploma', 'Bachelors', 'Masters', 'PhD']),
-            'award_type' => $this->faker->randomElement(['Bachelor of Science', 'Bachelor of Arts', 'Master of Science']),
-            'start_date' => $this->faker->date(),
-            'end_date' => $this->faker->date(),
-            'graduate_year' => $this->faker->year(),
+            'degree_type' => fake()->randomElement(['Bachelor of Science', 'Bachelor of Arts', 'Master of Engineering']),
+            'award_type' => fake()->randomElement(['First Class Honours', 'Merit', 'Pass']),
+            'graduated_in_year' => fake()->numberBetween(2020, 2026), // Optimized for trend reporting
         ];
     }
 }

@@ -11,13 +11,29 @@
             </flux:sidebar.header>
 
             <flux:sidebar.nav>
-                <flux:sidebar.group :heading="__('Platform')" class="grid">
+                <flux:sidebar.group :heading="__('Menu')" class="grid">
                     <flux:sidebar.item icon="home" :href="route('dashboard')" :current="request()->routeIs('dashboard')" wire:navigate>
                         {{ __('Dashboard') }}
                     </flux:sidebar.item>
                     
-                    <flux:sidebar.item icon="users" :href="route('graduates.index')" :current="request()->routeIs('graduates.index')" wire:navigate>
+                    <flux:sidebar.item icon="users" :href="route('graduate.list-graduate')" :current="request()->routeIs('graduate.list-graduate')" wire:navigate>
                         {{ __('Graduates') }}
+                    </flux:sidebar.item>
+                    
+                    <flux:sidebar.item icon="academic-cap" href="#" wire:navigate>
+                        {{ __('Acadmic Records') }}
+                    </flux:sidebar.item>
+                    
+                    <flux:sidebar.item icon="briefcase" href="#" wire:navigate>
+                        {{ __('Career Outcomes') }}
+                    </flux:sidebar.item>
+                    
+                    <flux:sidebar.item icon="user-group" wire:navigate>
+                        {{ __('Alumni CRM') }}
+                    </flux:sidebar.item>
+                    
+                    <flux:sidebar.item icon="chart-bar" :href="route('graduate.data-manager')" :current="request()->routeIs('graduate.data-manager')" wire:navigate>
+                        {{ __('Reports') }}
                     </flux:sidebar.item>
                 </flux:sidebar.group>
             </flux:sidebar.nav>

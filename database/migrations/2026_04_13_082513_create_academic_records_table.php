@@ -12,13 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('academic_records', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->foreignId('graduate_id')->constrained('graduates')->cascadeOnDelete();
             $table->string('degree_type')->nullable();
             $table->string('award_type')->nullable();
-            $table->date('start_date')->nullable();
-            $table->date('end_date')->nullable();
-            $table->string('graduate_year')->nullable();
+            $table->date('uni_start_date')->nullable();
+            $table->date('uni_end_date')->nullable();
+            $table->date('graduated_in_year')->nullable();
             $table->timestamps();
         });
     }

@@ -12,14 +12,14 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('employments', function (Blueprint $table) {
-            $table->id();
+            $table->id()->index();
             $table->foreignId('graduate_id')->constrained('graduates')->cascadeOnDelete();
             $table->string('employment_status')->nullable();
             $table->string('job_title')->nullable();
             $table->string('job_location_type')->nullable();
             $table->string('industry_sector')->nullable();
             $table->string('entrepreneurial_intent')->nullable();
-            $table->date('job_securing_date')->nullable();
+            $table->date('job_securing_year')->nullable();
             $table->timestamps();
         });
     }

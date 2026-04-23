@@ -22,23 +22,22 @@ class FeedbackSkillFactory extends Factory
     {
         $ratings = ['Excellent', 'Good', 'Average', 'Poor'];
 
-        return [
-            'graduate_id' => Graduate::factory(),
-            'sat_teaching_quality' => $this->faker->randomElement($ratings),
-            'sat_faculty_interaction' => $this->faker->randomElement($ratings),
-            'sat_career_assistance' => $this->faker->randomElement($ratings),
-            'sat_employment_assistance' => $this->faker->randomElement($ratings),
-            'sat_faculty_mentorship' => $this->faker->randomElement($ratings),
-            'exp_oral_presentation' => $this->faker->randomElement($ratings),
-            'exp_problem_solving' => $this->faker->randomElement($ratings),
-            'exp_practical_learning' => $this->faker->randomElement($ratings),
-            'exp_innovation_modeling' => $this->faker->randomElement($ratings),
-            'impact_communication' => $this->faker->randomElement($ratings),
-            'impact_problem_solving' => $this->faker->randomElement($ratings),
-            'impact_teamwork' => $this->faker->randomElement($ratings),
-            'impact_tech_knowledge' => $this->faker->randomElement($ratings),
-            'exp_industry_networking' => $this->faker->randomElement($ratings),
-            'exp_alumni_networking' => $this->faker->randomElement($ratings),
+     return [
+            'sat_teaching_quality' => fake()->numberBetween(1, 5),
+            'sat_faculty_interaction' => fake()->numberBetween(1, 5),
+            'exp_oral_presentation' => fake()->numberBetween(1, 5),
+            'impact_tech_knowledge' => fake()->numberBetween(1, 5),
+            'exp_industry_networking' => fake()->numberBetween(1, 5),
+            'sat_career_assistance' => fake()->numberBetween(1, 5),
+            'sat_employment_assistance' => fake()->numberBetween(1, 5),
+            'sat_faculty_mentorship' => fake()->numberBetween(1, 5),
+            'exp_problem_solving'  => fake()->numberBetween(1, 5),
+            'exp_practical_learning' => fake()->numberBetween(1, 5),
+            'exp_innovation_modeling'  => fake()->numberBetween(1, 5),
+            'impact_communication'  => fake()->numberBetween(1, 5),
+            'impact_problem_solving' => fake()->numberBetween(1, 5),
+            'impact_teamwork' => fake()->numberBetween(1, 5),
+            'exp_alumni_networking'  => fake()->numberBetween(1, 5),
         ];
     }
 }

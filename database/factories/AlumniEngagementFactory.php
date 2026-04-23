@@ -28,11 +28,9 @@ class AlumniEngagementFactory extends Factory
             'work_email' => $this->faker->optional()->companyEmail(),
             'postal_address' => $this->faker->address(),
             'primary_mobile_number' => $this->faker->phoneNumber(),
-            'secondary_mobile_number' => $this->faker->optional()->phoneNumber(),
             'landline_number' => $this->faker->optional()->phoneNumber(),
             'primary_social_media' => $this->faker->url(),
-            'secondary_social_media' => $this->faker->optional()->url(),
-            'tertiary_social_media' => $this->faker->optional()->url(),
+            'reachable_social_media' => $this->faker->url()
         ];
     }
 }

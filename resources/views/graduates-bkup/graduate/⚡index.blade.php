@@ -1,85 +1,3 @@
-<?php
-
-    use Livewire\Component;
-    use Livewire\WithPagination;
-    use App\Models\Graduate;
-
-    new class extends Component
-    {
-        use WithPagination;
-
-        // Define sort properties
-        public $search = '';
-        public $filterNationality = '';
-        public $sortby = 'graduation_date';
-        public $sortdirection = 'desc';
-
-        // This "listens" for the event and refreshes the component
-        #[On('graduate-saved')]
-        public function refreshList()
-        {
-            // Reset to page 1 so the newest/updated record is visible
-            $this->resetPage();
-            
-            // Force the component to re-render using JavaScript
-            $this->js('$wire.$refresh()');
-
-        }
-
-        // Reset pagination when search term changes
-        public function updatingSearch()
-        {
-            $this->resetPage();
-        }
-
-        // Method to handle sorting logic from the UI
-        public function sortBy($column) 
-        {
-            if ($this->sortby === $column) {
-                // Toggle sort direction if the same column is clicked
-                $this->sortdirection = $this->sortdirection === 'asc' ? 'desc' : 'asc';
-            } else {
-                // Set new column and default to ascending
-                $this->sortby = $column;
-                $this->sortdirection = 'asc';
-            }
-        }
-
-        #[On('graduate-deleted')]
-
-        public function delete(Graduate $graduate)
-        {
-            $graduate->delete();
-
-            $this->dispatch('graduate-deleted');
-
-            Flux::toast(
-                text: 'Graduate record permanently removed.',
-                variant: 'danger', // Red toast for deletions
-            );
-        }
-
-        public function with(): array
-        {
-            return [
-                // Fetch graduates from the DB records with pagination, ordered by latest
-                'graduates' => Graduate::query()
-                //  Filter by search term across multiple fields
-                ->where(function($query) {
-                    $query->where('student_number', 'like', '%' . $this->search . '%')
-                          ->orWhere('first_name', 'like', '%' . $this->search . '%')
-                          ->orWhere('last_name', 'like', '%' . $this->search . '%')
-                          ->orWhere('university_name', 'like', '%' . $this->search . '%')
-                          ->orWhere('nationality', 'like', '%' . $this->search . '%')
-                          ->orWhere('home_province', 'like', '%' . $this->search . '%');
-                })
-                ->orderBy($this->sortby, $this->sortdirection)
-                ->paginate(10),
-            ];
-        }
-    }
-
-?>
 
 <div class="max-w-7xl mx-auto space-y-6 p-4 md:p-8">
     <flux:heading size="xl" class="text-zinc-900 dark:text-white flex flex-col sm:flex-row sm:items-center justify-between gap-4">
@@ -96,8 +14,8 @@
         
         <!-- Modal Button -->
         <flux:modal.trigger name="create-graduate" class="flex-none">
-            <flux:button variant="primary" color="fuchsia" icon="plus" class="w-full sm:w-auto">
-                Create Graduate
+            <flux:button variant="primary" color="zinc" icon="plus" class="w-full sm:w-auto">
+                Create
             </flux:button>
         </flux:modal.trigger>
 
@@ -138,20 +56,9 @@
                     <div>
                         <flux:table.cell>
 
-                        {{-- Academic Records Button --}}
-                        <flux:button 
-                            icon="academic-cap" 
-                            variant="ghost" 
-                            size="xs" 
-                            color="zinc"
-                            title="Academic Records"
-                            wire:click="$dispatch('manage-academic-records', { graduate: {{ $graduate->id }} })" 
-                            class="hover:bg-fuchsia-500 hover:text-fuchsia-500 dark:hover:bg-fuchsia-950/30"
-                        />
-
-
+                            {{-- Graduant's Records Button --}}
                             <flux:button 
-                                icon="pencil-square" 
+                                icon="academic-cap" 
                                 variant="ghost" 
                                 size="xs" 
                                 wire:click="$dispatch('edit-graduate', { graduate: {{ $graduate->id }} })"

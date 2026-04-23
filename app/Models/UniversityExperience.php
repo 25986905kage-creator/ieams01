@@ -5,20 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-
-#[Fillable([
-        'graduate_id',
-        'has_leadership_experience',
-        'leadership_role_description',
-        'is_student_volunteer',
-        'is_education_adequate',
-        'rating_employment_potential',
-    ])
-]
+use Illuminate\Database\Eloquent\Builder;
 
 class UniversityExperience extends Model
 {
-   use HasFactory;
+    use HasFactory;
+
+    protected $guarded = ['id'];
 
    protected $casts = [
         'has_leadership_experience' => 'boolean',
@@ -26,8 +19,21 @@ class UniversityExperience extends Model
         'is_education_adequate' => 'boolean',
     ];
 
+   protected $fillable = [
+        'has_leadership_experience',
+        'leadership_role_description',
+        'is_student_volunteer',
+        'is_education_adequate',
+        'rating_employment_potential',
+    ];
+
     public function graduate(): BelongsTo
     {
         return $this->belongsTo(Graduate::class);
+    }
+
+    public function scopeLeaders(Builder $query): Builder
+    {
+        return $query->where('has_leadership_experience', true);
     }
 }
